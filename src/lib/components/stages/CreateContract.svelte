@@ -11,7 +11,12 @@
   const matches = $derived(VALUE_REGEX.test(value));
 </script>
 
-<Dialogue dialogue={[`Let's start by creating a contract. Name it "Bot101".`]} name="System" />
+<!-- TODO: how can we make this transitino smoother? -->
+<Dialogue
+  dialogue={[`Let's start by creating a contract. Name it "Bot101".`]}
+  name="System"
+  class="absolute bottom-4 left-4"
+/>
 
 <CodeInput
   bind:value
