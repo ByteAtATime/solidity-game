@@ -19,6 +19,7 @@
     `Are you sure you named it "Bot101"?`,
     `A contract is declared using <code>contract [name]</code>.`,
   ]}
+  answer="contract Bot101"
 >
   {#snippet children(input)}{@render input()}{` {
 
