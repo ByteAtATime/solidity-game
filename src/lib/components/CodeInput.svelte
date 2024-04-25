@@ -47,7 +47,7 @@
     bind:value={rawValue}
     type="text"
     placeholder="Type your code here..."
-    class="input input-bordered input-primary w-full border-2"
+    class="input input-bordered input-primary my-2 w-full border-2"
   />
 {/snippet}
 
