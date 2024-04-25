@@ -30,7 +30,7 @@
   <CodeForm
     matchPattern={VALUE_REGEX}
     hints={[
-      "Did you remember to mark it as and <code>external</code> <code>payable</code>?",
+      "Did you remember to mark it as <code>external</code> and <code>payable</code>?",
       "There should be no <code>return</code> statement in this function.",
     ]}
     answer="function sendToBot() external payable"
