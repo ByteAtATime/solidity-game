@@ -21,7 +21,7 @@
   const matches = $derived(matchPattern.test(value));
 </script>
 
-<form>
+<form class="flex w-full flex-col gap-y-6">
   <CodeInput bind:value {hints} {answer}>
     {#snippet children(input)}
       {@render childrenProp(input)}
