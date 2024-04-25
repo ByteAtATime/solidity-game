@@ -47,12 +47,13 @@
     bind:value={rawValue}
     type="text"
     placeholder="Type your code here..."
-    class="input input-bordered input-primary border-2"
+    class="input input-bordered input-primary w-full border-2"
   />
 {/snippet}
 
-<div class="flex w-full max-w-sm flex-col">
-  <pre class="mb-4 flex justify-center"><code>{@render children(input)}</code></pre>
+<div class="flex w-full max-w-xl flex-col">
+  <pre class="mb-4 flex w-full justify-center"><code class="w-full">{@render children(input)}</code
+    ></pre>
 
   {#if hints.length > usedHints.length}
     <button
