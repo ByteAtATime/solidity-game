@@ -58,6 +58,7 @@
   {#if hints.length > usedHints.length}
     <button
       class="font-bold text-info"
+      type="button"
       onclick={() => {
         const hint = hints[usedHints.length];
         if (hint) usedHints = [hint, ...usedHints];
@@ -70,7 +71,9 @@
       {/if}
     </button>
   {:else if answer}
-    <button class="font-bold text-success" onclick={revealAnswer}> Reveal answer </button>
+    <button class="font-bold text-success" type="button" onclick={revealAnswer}>
+      Reveal answer
+    </button>
   {/if}
 
   <div class="mt-2 flex flex-col gap-y-4">

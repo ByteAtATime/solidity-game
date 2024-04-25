@@ -1,14 +1,13 @@
 <script lang="ts">
   import Dialogue from "$lib/components/Dialogue.svelte";
   import CodeInput from "$lib/components/CodeInput.svelte";
+  import CodeForm from "../CodeForm.svelte";
 
   const { next }: { next: () => void } = $props();
 
   let value = $state("");
 
   const VALUE_REGEX = /^contract\s+Bot101(\s*\/)?$/;
-
-  const matches = $derived(VALUE_REGEX.test(value));
 </script>
 
 <!-- TODO: how can we make this transitino smoother? -->
@@ -18,17 +17,18 @@
   class="absolute bottom-4 left-4"
 />
 
-<CodeInput
-  bind:value
+<CodeForm
+  onsubmit={next}
+  matchPattern={VALUE_REGEX}
   hints={[
     `Are you sure you named it "Bot101"?`,
     `A contract is declared using <code>contract [name]</code>.`,
   ]}
   answer="contract Bot101"
 >
-  {#snippet children(input)}{@render input()}{` {
+  {#snippet children(input)}
+    {@render input()}{` {
 
-}`}{/snippet}
-</CodeInput>
-
-<button disabled={!matches} class="btn btn-primary btn-block" onclick={next}> Next </button>
+}`}
+  {/snippet}
+</CodeForm>

@@ -1,11 +1,10 @@
 <script lang="ts">
   import Dialogue from "$lib/components/Dialogue.svelte";
   import BotProfile from "$lib/components/BotProfile.svelte";
-  import CodeInput from "../CodeInput.svelte";
+  import CodeForm from "../CodeForm.svelte";
 
   const { next }: { next: () => void } = $props();
 
-  let value = $state("");
   let currentIndex = $state(0);
 
   const VALUE_REGEX = $derived(
@@ -13,8 +12,6 @@
       `^function\\s+sendToBot\\s*\\(\\s*\\)\\s+(payable\\s+external|external\\s+payable)$`,
     ),
   );
-
-  const matches = $derived(VALUE_REGEX.test(value));
 </script>
 
 <Dialogue
@@ -30,13 +27,14 @@
 <BotProfile />
 
 {#if currentIndex >= 1}
-  <CodeInput
-    bind:value
+  <CodeForm
+    matchPattern={VALUE_REGEX}
     hints={[
       "Did you remember to mark it as and <code>external</code> <code>payable</code>?",
       "There should be no <code>return</code> statement in this function.",
     ]}
     answer="function sendToBot() external payable"
+    onsubmit={next}
   >
     {#snippet children(input)}{`contract GoodBot {
   address public evilBot = 0x…;
@@ -45,7 +43,5 @@
 
   }
 }`}{/snippet}
-  </CodeInput>
-
-  <button disabled={!matches} class="btn btn-primary btn-block" onclick={next}> Next </button>
+  </CodeForm>
 {/if}
