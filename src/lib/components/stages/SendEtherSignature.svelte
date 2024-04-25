@@ -1,6 +1,7 @@
 <script lang="ts">
+  import { getBot } from "$lib/bot.svelte";
   import Dialogue from "$lib/components/Dialogue.svelte";
-  import BotProfile from "$lib/components/BotProfile.svelte";
+  import AddressBook from "../AddressBook.svelte";
   import CodeForm from "../CodeForm.svelte";
 
   const { next }: { next: () => void } = $props();
@@ -12,6 +13,8 @@
       `^function\\s+sendToBot\\s*\\(\\s*\\)\\s+(payable\\s+external|external\\s+payable)$`,
     ),
   );
+
+  const bot = $derived.by(getBot);
 </script>
 
 <Dialogue
@@ -24,7 +27,7 @@
   bind:currentIndex
 />
 
-<BotProfile />
+<AddressBook profiles={[{address: bot!.address, name: "[BOT 101]"}]} />
 
 {#if currentIndex >= 1}
   <CodeForm

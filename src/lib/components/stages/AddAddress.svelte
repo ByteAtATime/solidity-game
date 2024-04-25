@@ -1,6 +1,6 @@
 <script lang="ts">
   import { getBot } from "$lib/bot.svelte";
-  import BotProfile from "../BotProfile.svelte";
+  import AddressBook from "../AddressBook.svelte";
   import CodeForm from "../CodeForm.svelte";
   import Dialogue from "../Dialogue.svelte";
 
@@ -19,7 +19,8 @@
   dialogue={[
     "Great job!",
     "Next, we need to be able to reference the bot in our contract.",
-    "I have added a profile for the bot in the bottom right corner of your screen.",
+    "I have added an address book in the bottom right corner of your screen.",
+    "This is where I will place important addresses in the future. You can copy the bot's address from here.",
     `Please create a field in the contract to store the bot's address named "evilBot", and make it public.`,
   ]}
   name="System"
@@ -28,10 +29,10 @@
 />
 
 {#if currentIndex >= 2}
-  <BotProfile />
+  <AddressBook profiles={[{address: bot!.address, name: "[BOT 101]"}]} />
 {/if}
 
-{#if currentIndex >= 3}
+{#if currentIndex >= 4}
   <CodeForm
     onsubmit={next}
     matchPattern={VALUE_REGEX}
