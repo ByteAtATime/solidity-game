@@ -19,5 +19,12 @@
     <AddAddress next={nextStage} />
   {:else if stage === Stage.SEND_ETHER_SIGNATURE}
     <SendEtherSignature next={nextStage} />
+  {:else}
+    <div class="flex max-w-sm flex-col items-center text-center">
+      <h1 class="text-2xl font-bold">You've reached the end!</h1>
+      <p class="text-gray-500">
+        Thank you for playing! We have more content planned, so stay tuned!
+      </p>
+    </div>
   {/if}
 </div>
