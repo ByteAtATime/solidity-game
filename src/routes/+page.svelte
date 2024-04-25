@@ -3,26 +3,21 @@
   import CreateContract from "$lib/components/stages/CreateContract.svelte";
   import Init from "$lib/components/stages/Init.svelte";
   import SendEtherSignature from "$lib/components/stages/SendEtherSignature.svelte";
+  import { getGameState, Stage, nextStage } from "$lib/state.svelte";
 
-  enum Step {
-    INIT,
-    CREATE_CONTRACT,
-    ADD_ADDRESS,
-    SEND_ETHER_SIGNATURE,
-    SEND_ETHER_BODY,
-  }
-
-  let step = $state(Step.INIT);
+  const { stage, loaded } = $derived.by(getGameState);
 </script>
 
 <div class="mx-auto flex min-h-screen max-w-xl flex-col items-center justify-center gap-y-8">
-  {#if step === Step.INIT}
-    <Init next={() => (step = Step.CREATE_CONTRACT)} />
-  {:else if step === Step.CREATE_CONTRACT}
-    <CreateContract next={() => (step = Step.ADD_ADDRESS)} />
-  {:else if step === Step.ADD_ADDRESS}
-    <AddAddress next={() => (step = Step.SEND_ETHER_SIGNATURE)} />
-  {:else if step === Step.SEND_ETHER_SIGNATURE}
-    <SendEtherSignature next={() => (step = Step.SEND_ETHER_BODY)} />
+  {#if !loaded}
+    <span class="loading loading-spinner loading-lg"></span>
+  {:else if stage === Stage.INIT}
+    <Init next={nextStage} />
+  {:else if stage === Stage.CREATE_CONTRACT}
+    <CreateContract next={nextStage} />
+  {:else if stage === Stage.ADD_ADDRESS}
+    <AddAddress next={nextStage} />
+  {:else if stage === Stage.SEND_ETHER_SIGNATURE}
+    <SendEtherSignature next={nextStage} />
   {/if}
 </div>
