@@ -2,11 +2,14 @@
   import AddAddress from "$lib/components/stages/AddAddress.svelte";
   import CreateContract from "$lib/components/stages/CreateContract.svelte";
   import Init from "$lib/components/stages/Init.svelte";
+  import SendEtherSignature from "$lib/components/stages/SendEtherSignature.svelte";
 
   enum Step {
     INIT,
     CREATE_CONTRACT,
     ADD_ADDRESS,
+    SEND_ETHER_SIGNATURE,
+    SEND_ETHER_BODY,
   }
 
   let step = $state(Step.INIT);
@@ -18,6 +21,8 @@
   {:else if step === Step.CREATE_CONTRACT}
     <CreateContract next={() => (step = Step.ADD_ADDRESS)} />
   {:else if step === Step.ADD_ADDRESS}
-    <AddAddress next={() => console.log("not yet implemented")} />
+    <AddAddress next={() => (step = Step.SEND_ETHER_SIGNATURE)} />
+  {:else if step === Step.SEND_ETHER_SIGNATURE}
+    <SendEtherSignature next={() => (step = Step.SEND_ETHER_BODY)} />
   {/if}
 </div>
