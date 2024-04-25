@@ -1,10 +1,12 @@
 <script lang="ts">
+  import AddAddress from "$lib/components/stages/AddAddress.svelte";
   import CreateContract from "$lib/components/stages/CreateContract.svelte";
   import Init from "$lib/components/stages/Init.svelte";
 
   enum Step {
     INIT,
     CREATE_CONTRACT,
+    ADD_ADDRESS,
   }
 
   let step = $state(Step.INIT);
@@ -14,6 +16,8 @@
   {#if step === Step.INIT}
     <Init next={() => (step = Step.CREATE_CONTRACT)} />
   {:else if step === Step.CREATE_CONTRACT}
-    <CreateContract next={() => console.log("not yet implemented")} />
+    <CreateContract next={() => (step = Step.ADD_ADDRESS)} />
+  {:else if step === Step.ADD_ADDRESS}
+    <AddAddress next={() => console.log("not yet implemented")} />
   {/if}
 </div>

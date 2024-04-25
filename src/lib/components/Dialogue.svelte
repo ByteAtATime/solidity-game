@@ -1,20 +1,21 @@
 <script lang="ts">
   import DialogueContent from "./DialogueContent.svelte";
 
-  const {
+  let {
     dialogue,
     onfinish,
     name,
+    currentIndex = $bindable(0),
     class: className = "",
   }: {
     dialogue: string[];
+    currentIndex?: number;
     onfinish?: (() => void) | undefined;
     name: string;
     class?: string | undefined;
   } = $props();
 
   let isWaiting = $state(false);
-  let currentIndex = $state(0);
 
   let content: DialogueContent | undefined = $state();
 </script>

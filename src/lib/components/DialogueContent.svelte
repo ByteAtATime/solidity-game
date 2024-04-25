@@ -1,5 +1,6 @@
 <script lang="ts">
   import { DIALOGUE_DELAY } from "$lib/constants";
+  import { untrack } from "svelte";
 
   let {
     dialogue,
@@ -19,11 +20,13 @@
     // when a new dialogue is passed, reset the component
     dialogue;
 
-    currentIndex = 0;
-    currentLength = 0;
-    isWaiting = false;
+    untrack(() => {
+      currentIndex = 0;
+      currentLength = 0;
+      isWaiting = false;
 
-    updateDialogueDisplay();
+      updateDialogueDisplay();
+    });
   });
 
   const currentText = $derived(dialogue[currentIndex]?.slice(0, currentLength));
