@@ -1,11 +1,8 @@
 <script lang="ts">
   import Dialogue from "$lib/components/Dialogue.svelte";
-  import CodeInput from "$lib/components/CodeInput.svelte";
   import CodeForm from "../CodeForm.svelte";
 
   const { next }: { next: () => void } = $props();
-
-  let value = $state("");
 
   const VALUE_REGEX = /^contract\s+GoodBot(\s*\/)?$/;
 </script>
