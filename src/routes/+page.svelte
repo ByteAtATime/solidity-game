@@ -2,6 +2,7 @@
   import AddAddress from "$lib/components/stages/AddAddress.svelte";
   import CreateContract from "$lib/components/stages/CreateContract.svelte";
   import Init from "$lib/components/stages/Init.svelte";
+  import SendEtherBody from "$lib/components/stages/SendEtherBody.svelte";
   import SendEtherSignature from "$lib/components/stages/SendEtherSignature.svelte";
   import { getGameState, Stage, nextStage } from "$lib/state.svelte";
 
@@ -19,6 +20,8 @@
     <AddAddress next={nextStage} />
   {:else if stage === Stage.SEND_ETHER_SIGNATURE}
     <SendEtherSignature next={nextStage} />
+  {:else if stage === Stage.SEND_ETHER_BODY}
+    <SendEtherBody next={nextStage} />
   {:else}
     <div class="flex max-w-sm flex-col items-center text-center">
       <h1 class="text-2xl font-bold">You've reached the end!</h1>
