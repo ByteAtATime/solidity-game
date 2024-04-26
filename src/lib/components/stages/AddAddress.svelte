@@ -43,7 +43,7 @@
     ]}
     answer={`address public evilBot = ${bot?.address};`}
   >
-    {#snippet children(input)}{`contract Bot101 {
+    {#snippet children(input)}{`contract GoodBot {
   `}{@render input()}{`
 }`}{/snippet}
   </CodeForm>
