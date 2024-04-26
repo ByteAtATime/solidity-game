@@ -4,7 +4,7 @@
 
   const { next }: { next: () => void } = $props();
 
-  const VALUE_REGEX = /^contract\s+GoodBot(\s*\/)?$/;
+  const matchPatterns = { contract: /^contract\s+GoodBot(\s*\/)?$/ };
 </script>
 
 <!-- TODO: how can we make this transitino smoother? -->
@@ -16,15 +16,15 @@
 
 <CodeForm
   onsubmit={next}
-  matchPattern={VALUE_REGEX}
+  {matchPatterns}
   hints={[
     `Are you sure you named it "GoodBot"?`,
     `A contract is declared using <code>contract [name]</code>.`,
   ]}
-  answer="contract GoodBot"
+  answers={{ contract: "contract GoodBot" }}
 >
   {#snippet children(input)}
-    {@render input()}{` {
+    {@render input("contract")}{` {
 
 }`}
   {/snippet}

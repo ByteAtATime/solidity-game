@@ -5,36 +5,38 @@
   let {
     children,
     hints = [],
-    value = $bindable(""),
-    answer,
+    values = $bindable({}),
+    answers,
   }: {
-    children: Snippet<[input: Snippet]>;
+    children: Snippet<[input: Snippet<[key: string]>]>;
     hints?: string[] | undefined;
-    value?: string | undefined;
-    answer?: string | undefined;
+    values?: Record<string, string> | undefined;
+    answers?: Record<string, string> | undefined;
   } = $props();
-
-  let rawValue = $state(value);
 
   let usedHints: string[] = $state([]);
 
-  $effect(() => {
-    value = rawValue.trim();
-  });
-
-  $effect(() => {
-    rawValue = value;
-  });
-
   const revealAnswer = () => {
+    const answerKeys = Object.keys(answers ?? {});
+    let currentAnswer = 0;
     let currentIndex = 1;
+
     let interval = setInterval(() => {
-      if (!answer) return;
+      if (!answers) return;
 
-      value = answer.slice(0, currentIndex);
+      const key = answerKeys[currentAnswer];
 
-      if (currentIndex === answer.length) {
-        clearInterval(interval);
+      if (!(key in answers)) return;
+
+      values = { ...values, [key]: answers[key]?.slice(0, currentIndex) };
+
+      if (currentIndex === answers[key].length) {
+        if (currentAnswer === answerKeys.length - 1) {
+          clearInterval(interval);
+        } else {
+          currentIndex = 1;
+          currentAnswer++;
+        }
       } else {
         currentIndex++;
       }
@@ -42,9 +44,10 @@
   };
 </script>
 
-{#snippet input()}
+{#snippet input(key)}
   <input
-    bind:value={rawValue}
+    oninput={(e) => (values = { ...values, [key]: e.currentTarget.value })}
+    value={values[key]}
     type="text"
     placeholder="Type your code here..."
     class="input input-bordered input-primary my-2 w-full border-2"
@@ -70,7 +73,7 @@
         Still stuck?
       {/if}
     </button>
-  {:else if answer}
+  {:else if answers}
     <button class="font-bold text-success" type="button" onclick={revealAnswer}>
       Reveal answer
     </button>

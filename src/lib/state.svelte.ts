@@ -5,6 +5,7 @@ export enum Stage {
   SEND_ETHER_SIGNATURE,
   SEND_ETHER_BODY,
   CALL_COUNT_MAPPING,
+  RUN_SEND_ETHER,
 }
 
 export type GameState = {

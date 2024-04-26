@@ -11,9 +11,9 @@
   const bot = $derived.by(getBot);
   const botProfile = $derived.by(getBotProfile);
 
-  const VALUE_REGEX = $derived(
-    new RegExp(`^address\\s+public\\s+evilBot\\s*=\\s*${bot?.address}\\s*;`),
-  );
+  const matchPatterns = $derived({
+    declaration: new RegExp(`^address\\s+public\\s+evilBot\\s*=\\s*${bot?.address}\\s*;`),
+  });
 </script>
 
 <Dialogue
@@ -36,16 +36,16 @@
 {#if currentIndex >= 4}
   <CodeForm
     onsubmit={next}
-    matchPattern={VALUE_REGEX}
+    {matchPatterns}
     hints={[
       "Did you copy the correct address? The bot’s profile is at the bottom right corner of your screen.",
       "Make sure your variable is public!",
       "Did you forget a semicolon at the end of your line? ;)",
     ]}
-    answer={`address public evilBot = ${bot?.address};`}
+    answers={{ declaration: `address public evilBot = ${bot?.address};` }}
   >
     {#snippet children(input)}{`contract GoodBot {
-  `}{@render input()}{`
+  `}{@render input("declaration")}{`
 }`}{/snippet}
   </CodeForm>
 {/if}

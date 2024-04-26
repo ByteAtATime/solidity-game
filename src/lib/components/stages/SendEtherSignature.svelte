@@ -8,11 +8,9 @@
 
   let currentIndex = $state(0);
 
-  const VALUE_REGEX = $derived(
-    new RegExp(
-      `^function\\s+sendToBot\\s*\\(\\s*\\)\\s+(payable\\s+external|external\\s+payable)$`,
-    ),
-  );
+  const matchPatterns = {
+    signature: /^function\s+sendToBot\s*\(\s*\)\s+(payable\s+external|external\s+payable)$/,
+  };
 
   const bot = $derived.by(getBot);
 </script>
@@ -31,18 +29,18 @@
 
 {#if currentIndex >= 1}
   <CodeForm
-    matchPattern={VALUE_REGEX}
+    {matchPatterns}
     hints={[
       "Did you remember to mark it as <code>external</code> and <code>payable</code>?",
       "There should be no <code>return</code> statement in this function.",
     ]}
-    answer="function sendToBot() external payable"
+    answers={{ signature: "function sendToBot() external payable" }}
     onsubmit={next}
   >
     {#snippet children(input)}{`contract GoodBot {
   address public evilBot = 0x…;
 
-  `}{@render input()}{` {
+  `}{@render input("signature")}{` {
 
   }
 }`}{/snippet}
