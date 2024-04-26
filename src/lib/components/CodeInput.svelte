@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import { ANSWER_REVEAL_DELAY } from "$lib/constants";
+  import Hints from "./Hints.svelte";
 
   let {
     children,
@@ -13,8 +14,6 @@
     values?: Record<string, string> | undefined;
     answers?: Record<string, string> | undefined;
   } = $props();
-
-  let usedHints: string[] = $state([]);
 
   const revealAnswer = () => {
     const answerKeys = Object.keys(answers ?? {});
@@ -58,32 +57,7 @@
   <pre class="mb-4 flex w-full justify-center"><code class="w-full">{@render children(input)}</code
     ></pre>
 
-  {#if hints.length > usedHints.length}
-    <button
-      class="font-bold text-info"
-      type="button"
-      onclick={() => {
-        const hint = hints[usedHints.length];
-        if (hint) usedHints = [hint, ...usedHints];
-      }}
-    >
-      {#if usedHints.length === 0}
-        Stuck?
-      {:else}
-        Still stuck?
-      {/if}
-    </button>
-  {:else if answers}
-    <button class="font-bold text-success" type="button" onclick={revealAnswer}>
-      Reveal answer
-    </button>
+  {#if hints}
+    <Hints {hints} {revealAnswer} />
   {/if}
-
-  <div class="mt-2 flex flex-col gap-y-4">
-    {#each usedHints as hint}
-      <div class="card card-compact bg-info text-info-content">
-        <div class="card-body"><p>{@html hint}</p></div>
-      </div>
-    {/each}
-  </div>
 </div>
