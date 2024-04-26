@@ -25,8 +25,12 @@
       {@const shortAddress = profile.address.slice(0, 5) + "…" + profile.address.slice(-4)}
 
       <div class="flex flex-col items-center">
-        <div class="avatar placeholder">
-          <div class="w-16 rounded-full bg-neutral"></div>
+        <div class="avatar" class:placeholder={!profile.avatar}>
+          <div class="w-16 rounded-full bg-black">
+            {#if profile.avatar}
+              <img src={profile.avatar} alt={profile.name} class="!w-16 rounded-full bg-black" />
+            {/if}
+          </div>
         </div>
 
         <p class="font-bold"><span class="font-bold">{profile.name}</span></p>

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { getBotProfile } from "$lib/bot.svelte";
+  import AddressBook from "../AddressBook.svelte";
   import CodeForm from "../CodeForm.svelte";
   import Dialogue from "../Dialogue.svelte";
 
@@ -6,6 +8,8 @@
 
   const VALUE_REGEX =
     /payable\s*\(\s*evilBot\s*\)\s*\.\s*call\s*{\s*value:\s*msg.value\s*}\s*\(\s*\)\s*;/;
+
+  const botProfile = $derived.by(getBotProfile);
 </script>
 
 <Dialogue
@@ -33,3 +37,5 @@
   }
 }`}{/snippet}
 </CodeForm>
+
+<AddressBook profiles={[botProfile]} />

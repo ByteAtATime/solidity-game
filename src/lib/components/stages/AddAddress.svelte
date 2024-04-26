@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getBot } from "$lib/bot.svelte";
+  import { getBot, getBotProfile } from "$lib/bot.svelte";
   import AddressBook from "../AddressBook.svelte";
   import CodeForm from "../CodeForm.svelte";
   import Dialogue from "../Dialogue.svelte";
@@ -9,6 +9,7 @@
   let currentIndex = $state(0);
 
   const bot = $derived.by(getBot);
+  const botProfile = $derived.by(getBotProfile);
 
   const VALUE_REGEX = $derived(
     new RegExp(`^address\\s+public\\s+evilBot\\s*=\\s*${bot?.address}\\s*;`),
@@ -29,7 +30,7 @@
 />
 
 {#if currentIndex >= 2}
-  <AddressBook profiles={[{address: bot!.address, name: "[BOT 101]"}]} />
+  <AddressBook profiles={[botProfile]} />
 {/if}
 
 {#if currentIndex >= 4}

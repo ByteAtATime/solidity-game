@@ -1,5 +1,6 @@
 import { isHex, type Hex } from "viem";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
+import bot101Avatar from "$assets/avatars/bot101.png";
 
 let botPrivateKey = $state<Hex | null>(null);
 
@@ -20,5 +21,14 @@ export const getBot = () =>
   botAccount
     ? {
         address: botAccount.address,
+      }
+    : undefined;
+
+export const getBotProfile = () =>
+  botAccount
+    ? {
+        address: botAccount.address,
+        name: "[BOT 101]",
+        avatar: bot101Avatar,
       }
     : undefined;
