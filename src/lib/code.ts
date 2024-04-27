@@ -23,7 +23,7 @@ export const parseCode = (input: string): { code: string; decorations: Decoratio
 
     decorations.push({
       start: code.length - value.length,
-      end: code.length,
+      end: code.length + rawValue.length - value.length,
       properties: { class: `input-${key}` },
     });
   }
