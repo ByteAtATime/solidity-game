@@ -21,7 +21,12 @@
     `Are you sure you named it "GoodBot"?`,
     `A contract is declared using <code>contract [name]</code>.`,
   ]}
-  answers={{ contract: "contract GoodBot" }}
+  answers={{
+    contract: {
+      content: "contract GoodBot",
+      reason: "This is how you declare a contract in Solidity.",
+    },
+  }}
 >
   {#snippet children(input)}
     {@render input("contract")}{` {

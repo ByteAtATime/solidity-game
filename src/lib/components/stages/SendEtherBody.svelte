@@ -28,7 +28,12 @@
     "Remember to send all the ether contained in the transaction! This value is accessible from <code>msg.value</code>.",
     "Did you forget a semicolon? ;)",
   ]}
-  answers={{ body: `payable(evilBot).call{value: msg.value}();` }}
+  answers={{
+    body: {
+      content: `payable(evilBot).call{value: msg.value}();`,
+      reason: `We first cast the bot's address to "payable", indicating that we can send ether to the address, then send "msg.value" ether (the ether sent with the transaction) by calling it without data (the empty parentheses).`,
+    },
+  }}
 >
   {#snippet children(input)}{`contract GoodBot {
   address public evilBot = 0x…;

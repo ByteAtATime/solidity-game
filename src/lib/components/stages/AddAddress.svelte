@@ -42,7 +42,12 @@
       "Make sure your variable is public!",
       "Did you forget a semicolon at the end of your line? ;)",
     ]}
-    answers={{ declaration: `address public evilBot = ${bot?.address};` }}
+    answers={{
+      declaration: {
+        content: `address public evilBot = ${bot?.address};`,
+        reason: `We make a new variable named evilBot set to the bot's addresss.`,
+      },
+    }}
   >
     {#snippet children(input)}{`contract GoodBot {
   `}{@render input("declaration")}{`

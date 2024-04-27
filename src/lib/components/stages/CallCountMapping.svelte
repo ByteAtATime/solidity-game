@@ -38,8 +38,14 @@
       "Remember to increment the number corresponding to the address that sent the transaction, which is accessible from <code>msg.sender</code>.",
     ]}
     answers={{
-      declaration: "mapping(address => uint256) public callsByAddress;",
-      increment: "callsByAddress[msg.sender]++;",
+      declaration: {
+        content: "mapping(address => uint256) public callsByAddress;",
+        reason: `We declare a mapping that maps addresses to numbers, which will store the number of times each address calls the function.`,
+      },
+      increment: {
+        content: "callsByAddress[msg.sender]++;",
+        reason: `We increment the number of calls by the address that sent the transaction ("msg.sender").`,
+      },
     }}
   >
     {#snippet children(

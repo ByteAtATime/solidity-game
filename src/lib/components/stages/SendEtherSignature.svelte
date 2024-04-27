@@ -34,7 +34,12 @@
       "Did you remember to mark it as <code>external</code> and <code>payable</code>?",
       "There should be no <code>return</code> statement in this function.",
     ]}
-    answers={{ signature: "function sendToBot() external payable" }}
+    answers={{
+      signature: {
+        content: "function sendToBot() external payable",
+        reason: `We declare a new function, marking it as "external" to indicate this should be called by humans (not contracts) and "payable" to accept ether.`,
+      },
+    }}
     onsubmit={next}
   >
     {#snippet children(input)}{`contract GoodBot {
