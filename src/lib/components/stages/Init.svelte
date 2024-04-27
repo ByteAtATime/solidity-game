@@ -24,6 +24,5 @@
         action: next,
       },
     ]}
-    triggerOnEnter
   />
 {/if}

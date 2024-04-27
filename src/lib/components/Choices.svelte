@@ -4,15 +4,10 @@
   const {
     choices,
     onclick,
-    triggerOnEnter = false,
   }: {
     choices: Choice[];
     onclick?: () => void | undefined;
-    triggerOnEnter?: boolean | undefined;
   } = $props();
-
-  if (triggerOnEnter && choices.length !== 1)
-    throw new Error("Do not know which choice to choose by default");
 
   const clickHandler = (action: () => void) => () => {
     onclick?.();
@@ -21,9 +16,8 @@
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Enter") {
-      if (triggerOnEnter) {
-        choices[0].action();
-      }
+      // if there is only one choice, trigger it on Enter
+      if (choices.length === 1) choices[0].action();
     }
   };
 </script>
