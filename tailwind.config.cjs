@@ -10,6 +10,13 @@ const config = {
       colors: {
         choice: "#66e46b",
       },
+      keyframes: {
+        "slide-hide-reveal": {
+          from: { width: 0 },
+          "50%": { left: 0, width: "100%" },
+          to: { left: "100%", width: 0 },
+        },
+      },
     },
   },
 

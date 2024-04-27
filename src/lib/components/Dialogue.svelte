@@ -7,12 +7,14 @@
     name,
     currentIndex = $bindable(0),
     class: className = "",
+    avatarClass = "",
   }: {
     dialogue: string[];
     currentIndex?: number;
     onfinish?: (() => void) | undefined;
     name: string;
     class?: string | undefined;
+    avatarClass?: string | undefined;
   } = $props();
 
   let isWaiting = $state(false);
@@ -22,7 +24,7 @@
 
 <div class="flex w-full max-w-xl {className}">
   <div class="flex w-full items-center gap-x-2">
-    <div class="aspect-square w-16 flex-shrink-0 rounded-full bg-gray-800"></div>
+    <div class="aspect-square w-16 flex-shrink-0 rounded-full bg-gray-800 {avatarClass}"></div>
 
     <div>
       <p class="text-sm font-bold uppercase tracking-wide">{name}</p>

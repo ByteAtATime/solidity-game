@@ -2,7 +2,7 @@
   import { ANSWER_REVEAL_DELAY } from "$lib/constants";
   import Hints from "./Hints.svelte";
   import CodeInput from "./CodeInput.svelte";
-  import { parseCode } from "$lib/code";
+  import { parseCodeWithInput } from "$lib/code";
   import { codeToHtml } from "shiki";
   import { Element, Html, Text, isTag } from "html-svelte-parser";
 
@@ -49,7 +49,7 @@
     }, ANSWER_REVEAL_DELAY);
   };
 
-  const { code, decorations } = parseCode(fullCode);
+  const { code, decorations } = parseCodeWithInput(fullCode);
 
   // TODO: Can we somehow delegate this to the server?
   const highlightPromise = codeToHtml(code, {
