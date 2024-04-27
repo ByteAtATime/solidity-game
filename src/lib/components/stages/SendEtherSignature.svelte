@@ -3,6 +3,7 @@
   import Dialogue from "$lib/components/Dialogue.svelte";
   import AddressBook from "../AddressBook.svelte";
   import CodeForm from "../CodeForm.svelte";
+  import CodeView from "../CodeView.svelte";
 
   const { next }: { next: () => void } = $props();
 
@@ -27,7 +28,13 @@
 
 <AddressBook profiles={[{address: bot!.address, name: "[BOT 101]"}]} />
 
-{#if currentIndex >= 1}
+{#if currentIndex < 1}
+  <CodeView code={`
+contract GoodBot {
+  address public evilBot = ${bot!.address};
+}
+`} />
+{:else}
   <CodeForm
     {matchPatterns}
     hints={[
@@ -41,13 +48,13 @@
       },
     }}
     onsubmit={next}
-  >
-    {#snippet children(input)}{`contract GoodBot {
-  address public evilBot = 0x…;
+    fullCode={`
+contract GoodBot {
+  address public evilBot = ${bot!.address};
 
-  `}{@render input("signature")}{` {
+  [signature:function sendToBot() external payable] {
 
   }
-}`}{/snippet}
-  </CodeForm>
+}`}
+  />
 {/if}

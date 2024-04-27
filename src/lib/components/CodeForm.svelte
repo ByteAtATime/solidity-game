@@ -1,19 +1,19 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import CodeInput from "./CodeInput.svelte";
+  import CodeInputs from "./CodeInputs.svelte";
 
   const {
     onsubmit,
     matchPatterns,
     hints,
     answers,
-    children: childrenProp,
+    fullCode,
   }: {
     onsubmit: () => void;
     matchPatterns: Record<string, RegExp>;
     hints?: string[];
-    answers?: Record<string, string>;
-    children: Snippet<[input: Snippet<[key: string]>]>;
+    answers?: Record<string, { content: string; reason: string }>;
+    fullCode: string;
   } = $props();
 
   let values = $state<Record<string, string>>(
@@ -39,11 +39,7 @@
     onsubmit();
   }}
 >
-  <CodeInput bind:values {hints} {answers}>
-    {#snippet children(input)}
-      {@render childrenProp(input)}
-    {/snippet}
-  </CodeInput>
+  <CodeInputs bind:values {hints} {answers} {fullCode} />
 
   <button disabled={!matches} class="btn btn-primary btn-block">Next</button>
 </form>

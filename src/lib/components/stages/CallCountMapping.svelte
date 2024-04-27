@@ -2,6 +2,7 @@
   import { getBot, getBotProfile } from "$lib/bot.svelte";
   import AddressBook from "../AddressBook.svelte";
   import CodeForm from "../CodeForm.svelte";
+  import CodeView from "../CodeView.svelte";
   import Dialogue from "../Dialogue.svelte";
 
   const { next }: { next: () => void } = $props();
@@ -29,7 +30,19 @@
   bind:currentIndex
 />
 
-{#if currentIndex >= 2}
+{#if currentIndex < 2}
+  <CodeView
+    code={`
+contract GoodBot {
+  address public evilBot = ${bot!.address};
+
+  function sendToBot() external payable {
+    payable(evilBot).send(msg.value);
+  }
+}
+`}
+  />
+{:else}
   <CodeForm
     onsubmit={next}
     {matchPatterns}
@@ -47,21 +60,16 @@
         reason: `We increment the number of calls by the address that sent the transaction ("msg.sender").`,
       },
     }}
-  >
-    {#snippet children(
-      input,
-    )}{`contract GoodBot {
-  address public evilBot = 0x${bot!.address};
-  `}{@render input(
-        "declaration",
-      )}{`
+    fullCode={`contract GoodBot {
+  address public evilBot = ${bot!.address};
+  [declaration:mapping(address => uint256) public callsByAddress;]
 
   function sendToBot() external payable {
-    `}{@render input("increment")}{`
+    [increment:callsByAddress\\[msg.sender\\]++;]
     payable(evilBot).send(msg.value);
   }
-}`}{/snippet}
-  </CodeForm>
+}`}
+  />
 {/if}
 
 <AddressBook profiles={[botProfile]} />

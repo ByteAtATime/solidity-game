@@ -2,6 +2,7 @@
   import { getBot, getBotProfile } from "$lib/bot.svelte";
   import AddressBook from "../AddressBook.svelte";
   import CodeForm from "../CodeForm.svelte";
+  import CodeView from "../CodeView.svelte";
   import Dialogue from "../Dialogue.svelte";
 
   const { next }: { next: () => void } = $props();
@@ -33,7 +34,15 @@
   <AddressBook profiles={[botProfile]} />
 {/if}
 
-{#if currentIndex >= 4}
+{#if currentIndex < 4}
+  <CodeView
+    code={`
+contract GoodBot {
+
+}
+`}
+  />
+{:else}
   <CodeForm
     onsubmit={next}
     {matchPatterns}
@@ -48,9 +57,10 @@
         reason: `We make a new variable named evilBot set to the bot's addresss.`,
       },
     }}
-  >
-    {#snippet children(input)}{`contract GoodBot {
-  `}{@render input("declaration")}{`
-}`}{/snippet}
-  </CodeForm>
+    fullCode={`
+contract GoodBot {
+  [declaration: address public evilBot = ${bot?.address};]
+}
+`}
+  />
 {/if}

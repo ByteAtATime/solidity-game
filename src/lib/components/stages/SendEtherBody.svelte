@@ -34,14 +34,14 @@
       reason: `We first cast the bot's address to "payable", indicating that we can send ether to the address, then send "msg.value" ether (the ether sent with the transaction) by calling it without data (the empty parentheses).`,
     },
   }}
->
-  {#snippet children(input)}{`contract GoodBot {
+  fullCode={`
+contract GoodBot {
   address public evilBot = 0x…;
 
   function sendToBot() external payable {
-    `}{@render input("body")}{`
+    [body:payable(evilBot).call{value: msg.value}();]
   }
-}`}{/snippet}
-</CodeForm>
+}`}
+/>
 
 <AddressBook profiles={[botProfile]} />

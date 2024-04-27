@@ -27,10 +27,9 @@
       reason: "This is how you declare a contract in Solidity.",
     },
   }}
->
-  {#snippet children(input)}
-    {@render input("contract")}{` {
+  fullCode={`
+[contract:contract GoodBot] {
 
-}`}
-  {/snippet}
-</CodeForm>
+}
+`}
+></CodeForm>
