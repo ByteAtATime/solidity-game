@@ -22,7 +22,7 @@
     `First, let's add the function signature. Create a new payable function, "sendToBot", and mark it as "external'.`,
   ]}
   name="System"
-  class="absolute bottom-4 left-4"
+  absolute
   bind:currentIndex
 />
 

@@ -37,7 +37,7 @@
     "Then, create another variable called lastCalledTime to store the last time the function was called.",
   ]}
   name="System"
-  class="absolute bottom-4 left-4"
+  absolute
   bind:currentIndex={initialDialogue}
 />
 
@@ -53,7 +53,7 @@
 
   function sendToBot() external payable {
     callsByAddress[msg.sender]++;
-    payable(evilBot).send(msg.value);
+    payable(evilBot).call{value: msg.value}();
   }
 }`}
     {answers}

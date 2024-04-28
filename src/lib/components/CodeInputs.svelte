@@ -58,8 +58,6 @@
     decorations,
   });
 
-  let inputIndex = $state(0);
-
   const processNode = (node: Element | Text) => {
     if (isTag(node)) {
       const className = node.attributes.find((attr) => attr.name === "class")?.value;
@@ -69,8 +67,6 @@
 
         if (node.tagName === "span" && inputRes) {
           const key = inputRes[1];
-
-          inputIndex++;
 
           return {
             component: CodeInput,
@@ -82,7 +78,6 @@
               onchange: (val: string) => {
                 values = { ...values, [key]: val };
               },
-              inputIndex: inputIndex - 1,
             },
           };
         }

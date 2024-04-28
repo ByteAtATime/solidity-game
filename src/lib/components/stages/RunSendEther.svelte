@@ -77,25 +77,21 @@
       "Click the button whenever you're ready.",
     ]}
     name="System"
-    class="absolute bottom-4 left-4"
+    absolute
     bind:currentIndex={initialIndex}
   />
 {:else}
   {#await sleep(2000)}
-    <Dialogue
-      dialogue={["Wha-? What's happening?"]}
-      name="System"
-      class="absolute bottom-0 left-0 p-4"
-    />
+    <Dialogue dialogue={["Wha-? What's happening?"]} name="System" absolute />
   {:then}
-    <div id="bot101-dialogue" class="absolute bottom-0 left-0 overflow-hidden">
+    <div id="bot101-dialogue" class="absolute left-1/2 top-0 -translate-x-1/2 overflow-hidden">
       <Dialogue
         dialogue={[
           "YOU DARE??? GIVE UP ON THIS FUTILE MISSION IMMEDIATELY.",
           "YOU WILL NEVER DEFEAT ME!!!",
         ]}
         name="[BOT 101]"
-        class="rounded-tr-2xl border-r-2 border-t-2 border-error bg-error/25 p-4 text-white"
+        class="rounded-bl-2xl rounded-br-2xl border-b-2 border-l-2 border-r-2 border-error bg-error/25 p-4 text-white"
         avatarClass="bg-error"
         onfinish={handleFinish}
       />
@@ -103,7 +99,7 @@
   {/await}
 
   <div
-    class="absolute bottom-0 left-0 h-28 w-0 max-w-xl animate-[slide-hide-reveal_3s_ease-in-out_forwards_0.5s] bg-black"
+    class="absolute left-0 top-0 h-28 w-0 animate-[slide-hide-reveal_3s_ease-in-out_forwards_0.5s] bg-black"
     id="dialogue-cover"
   ></div>
 {/if}

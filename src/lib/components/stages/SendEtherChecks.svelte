@@ -22,7 +22,7 @@
       "Great work! Unfortunately, a classified source has told me that [BOT 101] may be on the offense.",
     ]}
     name="System"
-    class="absolute bottom-4 left-4"
+    absolute
     onfinish={() => (stage = Stage.CHOICES)}
   />
   {#if stage === Stage.CHOICES}
@@ -33,7 +33,7 @@
           action: () => (stage = Stage.CREATE_CONSTANT),
         },
       ]}
-      class="absolute bottom-28 left-4"
+      class="absolute left-1/2 top-24 -translate-x-1/2"
     />
   {/if}
 {:else if stage === Stage.CREATE_CONSTANT}

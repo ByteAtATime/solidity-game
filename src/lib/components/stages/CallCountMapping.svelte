@@ -26,7 +26,7 @@
     "Increment this mapping every time the “sendToBot” function is called. Remember to mark it as public, so we can read from it.",
   ]}
   name="System"
-  class="absolute bottom-4 left-4"
+  absolute
   bind:currentIndex
 />
 
@@ -37,7 +37,7 @@ contract GoodBot {
   address public evilBot = ${bot!.address};
 
   function sendToBot() external payable {
-    payable(evilBot).send(msg.value);
+    payable(evilBot).call{ value: msg.value }();
   }
 }
 `}
@@ -66,7 +66,7 @@ contract GoodBot {
 
   function sendToBot() external payable {
     [increment:callsByAddress\\[msg.sender\\]++;]
-    payable(evilBot).send(msg.value);
+    payable(evilBot).call{value: msg.value}(msg.value);
   }
 }`}
   />

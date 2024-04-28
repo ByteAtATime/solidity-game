@@ -16,7 +16,7 @@
 <Dialogue
   dialogue={["Now, add a line to transfer all the ether sent with the transaction to the bot."]}
   name="System"
-  class="absolute bottom-4 left-4"
+  absolute
 />
 
 <CodeForm

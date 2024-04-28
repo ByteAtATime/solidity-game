@@ -1,18 +1,22 @@
+<script lang="ts" context="module">
+  let inputIndex = $state(0);
+</script>
+
 <script lang="ts">
+  inputIndex++;
+
   let {
     value = $bindable(""),
     answerLength = Infinity,
     onchange = () => {},
     tooltip,
     showTooltip,
-    inputIndex,
   }: {
     value?: string | undefined;
     answerLength?: number | undefined;
     onchange?: (value: string) => void;
     tooltip?: string | undefined;
     showTooltip?: boolean | undefined;
-    inputIndex: number;
   } = $props();
 
   const width = $derived(answerLength < 20 ? "w-auto" : "w-full");

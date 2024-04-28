@@ -11,7 +11,7 @@
 <Dialogue
   dialogue={[`Let's start by creating a contract. Name it "GoodBot".`]}
   name="System"
-  class="absolute bottom-4 left-4"
+  absolute
 />
 
 <CodeForm

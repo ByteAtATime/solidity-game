@@ -8,6 +8,7 @@
     currentIndex = $bindable(0),
     class: className = "",
     avatarClass = "",
+    absolute = false,
   }: {
     dialogue: string[];
     currentIndex?: number;
@@ -15,6 +16,7 @@
     name: string;
     class?: string | undefined;
     avatarClass?: string | undefined;
+    absolute?: boolean | undefined;
   } = $props();
 
   let isWaiting = $state(false);
@@ -22,7 +24,9 @@
   let content: DialogueContent | undefined = $state();
 </script>
 
-<div class="flex w-full max-w-xl {className}">
+<div
+  class="flex w-full max-w-xl {absolute && 'absolute left-1/2 top-4 -translate-x-1/2'} {className}"
+>
   <div class="flex w-full items-center gap-x-2">
     <div class="aspect-square w-16 flex-shrink-0 rounded-full bg-gray-800 {avatarClass}"></div>
 

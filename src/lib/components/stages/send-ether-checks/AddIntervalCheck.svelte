@@ -18,7 +18,7 @@
     "Remember to update lastCalledTime after the check to store the current time.",
   ]}
   name="System"
-  class="absolute bottom-4 left-4"
+  absolute
   bind:currentIndex={dialogueIndex}
 />
 
@@ -47,7 +47,7 @@
 
   function sendToBot() external payable [modifierInvoke:sendInterval] {
     callsByAddress[msg.sender]++;
-    payable(evilBot).send(msg.value);
+    payable(evilBot).call{value: msg.value}(msg.value);
   }
 }`}
     answers={{
