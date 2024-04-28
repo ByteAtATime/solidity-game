@@ -5,6 +5,7 @@
   import Init from "$lib/components/stages/Init.svelte";
   import RunSendEther from "$lib/components/stages/RunSendEther.svelte";
   import SendEtherBody from "$lib/components/stages/SendEtherBody.svelte";
+  import SendEtherChecks from "$lib/components/stages/SendEtherChecks.svelte";
   import SendEtherSignature from "$lib/components/stages/SendEtherSignature.svelte";
   import { getGameState, Stage, nextStage } from "$lib/state.svelte";
 
@@ -26,6 +27,8 @@
     <SendEtherBody next={nextStage} />
   {:else if stage === Stage.CALL_COUNT_MAPPING}
     <CallCountMapping next={nextStage} />
+  {:else if stage === Stage.SEND_ETHER_CHECKS}
+    <SendEtherChecks next={nextStage} />
   {:else if stage === Stage.RUN_SEND_ETHER}
     <RunSendEther next={nextStage} />
   {:else}

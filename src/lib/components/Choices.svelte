@@ -4,9 +4,11 @@
   const {
     choices,
     onclick,
+    class: className = "",
   }: {
     choices: Choice[];
     onclick?: () => void | undefined;
+    class?: string;
   } = $props();
 
   const clickHandler = (action: () => void) => () => {
@@ -24,7 +26,7 @@
 
 <svelte:window onkeydown={handleKeyDown} />
 
-<div class="flex w-1/2 max-w-xl flex-col">
+<div class="flex w-1/2 max-w-xl flex-col {className}">
   {#each choices as choice}
     <button
       class="group cursor-pointer font-bold text-choice"

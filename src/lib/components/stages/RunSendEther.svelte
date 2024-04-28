@@ -27,7 +27,17 @@
   address public evilBot = ${bot!.address};
   mapping(address => uint256) public callCount;
 
-  function sendToBot() external payable {
+  uint256 public constant SEND_INTERVAL = 1 hours;
+  uint256 public lastCalledTime;
+
+  modifier sendInterval() {
+    require(block.timestamp - lastCalledTime >= SEND_INTERVAL);
+    lastCalledTime = block.timestamp;
+
+    _;
+  }
+
+  function sendToBot() external payable sendInterval {
     callCount[msg.sender]++;
     payable(evilBot).call{value: msg.value}();
   }
@@ -39,6 +49,16 @@
     code={`contract GoodBot {
   address public evilBot = ${bot!.address};
   mapping(address => uint256) public callCount;
+
+  uint256 public constant SEND_INTERVAL = 1 hours;
+  uint256 public lastCalledTime;
+
+  modifier sendInterval() {
+    require(block.timestamp - lastCalledTime >= SEND_INTERVAL);
+    lastCalledTime = block.timestamp;
+
+    _;
+  }
 
   <Send Ether!>
   function sendToBot() external payable {
