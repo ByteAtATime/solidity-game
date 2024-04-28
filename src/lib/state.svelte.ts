@@ -48,3 +48,7 @@ export const nextStage = () => {
     stage: getGameState().stage + 1,
   });
 };
+
+export const resetGame = () => {
+  setGameState({ ...DEFAULT_GAME_STATE, loaded: true });
+};

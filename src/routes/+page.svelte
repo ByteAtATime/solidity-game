@@ -7,7 +7,7 @@
   import SendEtherBody from "$lib/components/stages/SendEtherBody.svelte";
   import SendEtherChecks from "$lib/components/stages/SendEtherChecks.svelte";
   import SendEtherSignature from "$lib/components/stages/SendEtherSignature.svelte";
-  import { getGameState, Stage, nextStage } from "$lib/state.svelte";
+  import { getGameState, Stage, nextStage, resetGame } from "$lib/state.svelte";
 
   const { stage, loaded } = $derived.by(getGameState);
 </script>
@@ -37,6 +37,8 @@
       <p class="text-gray-500">
         Thank you for playing! We have more content planned, so stay tuned!
       </p>
+
+      <button class="btn btn-primary mt-4" onclick={resetGame}> Play again </button>
     </div>
   {/if}
 </div>
