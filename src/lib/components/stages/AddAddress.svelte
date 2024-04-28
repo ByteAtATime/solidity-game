@@ -26,7 +26,7 @@
     `Please create a field in the contract to store the bot's address named "evilBot", and make it public.`,
   ]}
   name="System"
-  class="absolute bottom-4 left-4"
+  absolute
   bind:currentIndex
 />
 
