@@ -16,7 +16,7 @@
 </script>
 
 <div
-  class="absolute bottom-0 right-0 rounded-tl-2xl border-l-2 border-t-2 border-yellow-400 bg-yellow-200/25 px-6 py-4 text-white"
+  class="absolute bottom-0 left-0 right-0 border-t-2 border-yellow-400 bg-yellow-200/25 px-6 py-4 text-white sm:left-auto sm:rounded-tl-2xl sm:border-l-2"
 >
   <h1 class="mb-3 text-xl font-bold">Address Book</h1>
 
